@@ -8,11 +8,14 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "jspdf": "^2.3.1",
+    "pdfmake": "^0.1.71",
     "vue": "^3.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0"
+    "@vue/compiler-sfc": "^3.0.0",
+    "gulp": "^4.0.2"
   }
 }

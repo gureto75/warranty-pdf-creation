@@ -40,7 +40,7 @@
       </select>
     </div>
   </div>
-  <button @click="handleClick">Show Modal</button>
+  <button @click="handleClick">ΣΥΝΕΧΕΙΑ</button>
   <div v-if="showModal">
     <Modal
       :modalTitle="modalHeader"
@@ -55,8 +55,8 @@
       @close="handleClick"
     >
       <template v-slot:links>
-        <a href="">Sign Up Now</a>
-        <a href="">More Info</a>
+        <a href="#">ΚΑΤΙ ΑΛΛΟ</a>
+        <a href="#">ΚΑΤΙ ΑΛΛΟ</a>
       </template>
       <h3>{{ client }}</h3>
       <p>{{ serial }} - {{ supplierAlias }}</p>

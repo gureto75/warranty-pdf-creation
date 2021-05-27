@@ -28,6 +28,7 @@
       'clientName',
       'modalTitle',
       'modalContent',
+      'supplier',
       'theme',
     ],
     computed: {
@@ -98,7 +99,11 @@
                         { text: 'ΧΡΩΜΑ', style: 'tableHeader' },
                         { text: '#Serial', style: 'tableHeader' },
                       ],
-                      [`${this.brand} ${this.model}`, this.color, this.serial],
+                      [
+                        `${this.brand} ${this.model}`,
+                        this.color,
+                        `${this.serial}-${this.supplier}`,
+                      ],
                     ],
                   },
                 },

@@ -1,17 +1,46 @@
 <template>
   <div class="form" v-on:keyup.enter="handleClick">
-    <label for="client">Ονοματεπώνυμο</label>
-    <input type="text" ref="client" id="client" v-model="client" />
-    <label for="brand">Εταιρεία</label>
-    <input type="text" ref="brand" id="brand" v-model="brand" />
-    <label for="model">Μοντέλο</label>
-    <input type="text" ref="model" id="model" v-model="model" />
-    <label for="serial">Χρώμα</label>
-    <input type="text" ref="color" id="color" v-model="color" />
-    <label for="serial">Σειριακός</label>
-    <input type="text" ref="serial" id="serial" v-model="serial" />
-    <button @click="handleClick">Show Modal</button>
+    <div class="field-wrapper">
+      <label for="client">Ονοματεπώνυμο</label>
+      <input type="text" ref="client" id="client" v-model="client" />
+    </div>
+    <div class="field-wrapper">
+      <label for="brand">Εταιρεία</label>
+      <input type="text" ref="brand" id="brand" v-model="brand" />
+    </div>
+    <div class="field-wrapper">
+      <label for="model">Μοντέλο</label>
+      <input type="text" ref="model" id="model" v-model="model" />
+    </div>
+    <div class="field-wrapper">
+      <label for="serial">Χρώμα</label>
+      <input type="text" ref="color" id="color" v-model="color" />
+    </div>
+    <div class="field-wrapper">
+      <label for="serial">Σειριακός</label>
+      <input type="text" ref="serial" id="serial" v-model="serial" />
+    </div>
+    <div class="field-wrapper">
+      <label for="supplier">Προμηθευτής</label>
+      <select
+        name="supplier"
+        id="supplier"
+        ref="supplier"
+        @change="handleSelection"
+        :class="{
+          bulgaria: supplierAlias === 'bg',
+          france: supplierAlias === 'fr',
+        }"
+      >
+        <option value="atm" style="background-color: orange;"
+          >atmosfaira</option
+        >
+        <option value="fr" style="background-color: white;">Γάλλοι</option>
+        <option value="bg" style="background-color: skyblue;">Αχιλλέας</option>
+      </select>
+    </div>
   </div>
+  <button @click="handleClick">Show Modal</button>
   <div v-if="showModal">
     <Modal
       :modalTitle="modalHeader"
@@ -21,15 +50,16 @@
       :color="color"
       :serial="serial"
       :clientName="client"
-      theme=""
+      :supplier="this.$refs.supplier.value"
+      theme="sale"
       @close="handleClick"
     >
       <template v-slot:links>
         <a href="">Sign Up Now</a>
         <a href="">More Info</a>
       </template>
-      <!-- <h1>Slot Title</h1>
-      <p>Slot Content</p> -->
+      <h3>{{ client }}</h3>
+      <p>{{ serial }} - {{ supplierAlias }}</p>
     </Modal>
   </div>
 </template>
@@ -41,25 +71,32 @@
     name: 'App',
     data() {
       return {
-        modalContent: 'Πατα το κουμπί για να προχωρήσεις',
+        modalContent: '',
         brand: '',
         model: '',
         serial: '',
         color: '',
         client: '',
         showModal: false,
+        supplierAlias: 'atm',
       }
     },
     computed: {
       modalHeader() {
         return `${this.brand} ${this.model} ${this.color}`
       },
+      //   chosenSupplier() {
+      //     return this.$refs.supplier.value
+      //   },
     },
     methods: {
       handleClick() {
         // console.dir(this.$refs.name.value)
         // this.$refs.name.classList.add('active')
         this.showModal = !this.showModal
+      },
+      handleSelection() {
+        this.supplierAlias = this.$refs.supplier.value
       },
     },
     mounted() {
@@ -79,27 +116,46 @@
   }
 
   .form {
+    margin: 0 auto;
+    padding: 10px;
+    width: 800px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border: 4px solid rgb(7, 202, 202);
+    border-radius: 14px;
   }
 
-  .form button {
+  button {
     margin-top: 20px;
     padding: 16px 32px;
     background: rgb(7, 202, 202);
     border-radius: 5px;
   }
 
-  input {
+  input,
+  select {
     display: block;
     padding: 16px 10px;
     border: 1px solid #555;
     border-radius: 5px;
   }
 
+  select {
+    width: 170px;
+    background-color: orange;
+  }
+
   label {
     display: inline-block;
     margin-top: 20px;
+  }
+
+  .bulgaria {
+    background-color: skyblue;
+  }
+
+  .france {
+    background-color: white;
   }
 </style>

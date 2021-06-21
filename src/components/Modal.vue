@@ -8,7 +8,7 @@
       <p>{{ modalContent }}</p>
       <slot>...</slot>
       <div>
-        <button class="download" @click="createPdfMake">Save PDF</button>
+        <button class="download" @click="createPdfMake">Save PDF (code)</button>
       </div>
     </div>
   </div>
